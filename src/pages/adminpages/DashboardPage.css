@@ -1,0 +1,67 @@
+.counter {
+  color: #444;
+  background-color: #fff;
+  font-family: "Roboto Condensed", sans-serif;
+  text-align: center;
+  width: 200px;
+  padding: 20px 15px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 7px -7px #fcaa02;
+  border-radius: 7px;
+}
+.counter h3 {
+  color: #fff;
+  background-color: #fcaa02;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 6px 6px 5px;
+  margin: 0 0 16px;
+  border-radius: 5px;
+}
+.counter .counter-value {
+  font-size: 35px;
+  line-height: 35px;
+  font-weight: 700;
+  text-shadow: 5px 5px rgba(0, 0, 0, 0.15);
+  margin: 0 0 15px;
+  display: block;
+}
+.counter .counter-icon {
+  color: #fcaa02;
+  font-size: 35px;
+  line-height: 35px;
+}
+.counter.pink {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 7px -7px #ff664f;
+}
+.counter.pink h3 {
+  background-color: #ff664f;
+}
+.counter.pink .counter-icon {
+  color: #ff664f;
+}
+.counter.blue {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 7px -7px #0a88fd;
+}
+.counter.blue h3 {
+  background-color: #0a88fd;
+}
+.counter.blue .counter-icon {
+  color: #0a88fd;
+}
+.counter.green {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 7px -7px #13637e;
+}
+.counter.green h3 {
+  background-color: #13637e;
+}
+.counter.green .counter-icon {
+  color: #13637e;
+}
+@media screen and (max-width: 990px) {
+  .counter {
+    margin-bottom: 40px;
+  }
+}

@@ -1,0 +1,75 @@
+create type addressType as table(
+	id int,
+	address1 nvarchar(255),
+	address2 nvarchar(255),
+	address3 nvarchar(500)
+)
+GO
+create type phoneType as table(
+	id int,
+	number nvarchar(20)
+)
+GO
+create procedure sp_ABMaster_addedit (
+	@id int,
+	@userid int=0,
+	@title nvarchar(255),
+	@firstname nvarchar(255),
+	@lastname nvarchar(255),
+	@phoneType phoneType readonly,
+	@addressType addressType readonly
+)
+as
+begin
+	if(isnull(@id,0)=0)
+	begin
+		declare @masterId int=0;
+		insert into tbl_ABMaster (userid,title,firstname,lastname) values(@userid,@title,@firstname,@lastname)
+		set @masterId = @@IDENTITY;
+		if(@masterId>0)
+		begin
+			insert into tbl_ABPhone (masterid, number)
+			select @masterId,number from @phoneType
+
+			insert into tbl_ABAddress (masterid, address1, address2, address3)
+			select @masterId, address1, address2, address3 from @addressType
+		end
+		select @masterId;
+	end
+	else if(isnull(@id,0)<>0)
+	begin
+		update tbl_ABMaster set title=@title,firstname=@firstname,lastname=@lastname,updatedate=GETDATE()
+		Where id=@id
+		
+		/*isdelete true*/
+		update tbl_ABPhone set isdeleted=1, updatedate=GETDATE() where masterid=@id;
+		update tbl_ABAddress set isdeleted=1, updatedate=GETDATE() where masterid=@id;
+		
+		/*Add New Entry*/
+		insert into tbl_ABPhone (masterid, number)
+		select @masterId,number from @phoneType
+
+		insert into tbl_ABAddress (masterid, address1, address2, address3)
+		select @masterId, address1, address2, address3 from @addressType
+	end
+end
+
+
+	/*2021/08/26*/
+create procedure sp_AB_SearchABMaster
+	@q nvarchar(255)
+as
+begin
+	select * from tbl_ABMaster mas
+	left join tbl_ABPhone phone on mas.id = phone.masterid
+	left join tbl_ABAddress addr on mas.id = addr.masterid
+	where 1=1
+	And (
+		mas.title like '%'+@q+'%' or mas.firstname like '%'+@q+'%' or mas.lastname like '%'+@q+'%'
+		or
+		phone.number like '%'+@q+'%'
+		or
+		addr.address1 like '%'+@q+'%' or addr.address2 like '%'+@q+'%' or addr.address3 like '%'+@q+'%'
+	)
+	And mas.isdeleted=0
+end
