@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-demo",
+  "name": "react-redux-startup",
   "version": "1.0.0",
-  "description": "",
+  "description": "learning reactjs with redux, and.design",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

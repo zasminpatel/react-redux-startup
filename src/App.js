@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./styles.css";
 import Routers from "./Routers";
+import "./styles.css";
 class App extends Component {
   render() {
     return (
