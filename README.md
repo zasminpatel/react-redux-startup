@@ -1,6 +1,6 @@
 # react-redux-learn
 
-##Created with CodeSandbox
+##Created with CodeSandbox and imported from github.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
